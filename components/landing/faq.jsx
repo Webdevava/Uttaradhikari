@@ -39,7 +39,7 @@ export default function FAQSection() {
   ];
 
   return (
-    <section ref={sectionRef} className="py-24 relative overflow-hidden bg-gradient-to-b from-background to-muted/20">
+    <section ref={sectionRef} className="py-24 relative overflow-hidden bg-gradient-to-b from-background to-muted/20" id="faq">
       {/* Decorative elements */}
       <motion.div 
         className="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-primary/5 blur-3xl opacity-70"

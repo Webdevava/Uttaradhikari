@@ -8,6 +8,8 @@ import FAQSection from "@/components/landing/faq";
 import CTASection from "@/components/landing/cta";
 import PricingSection from "@/components/landing/pricing";
 import TestimonialsSection from "@/components/landing/testimonials";
+import NotificationsVerificationSection from "@/components/landing/verification";
+import SecurityPrivacySection from "@/components/landing/security";
 
 export default function Home() {
   return (
@@ -18,6 +20,8 @@ export default function Home() {
       <FeaturesSection/>
       <HowItWorksSection/>
       <PricingSection/>
+      <NotificationsVerificationSection/>
+      <SecurityPrivacySection/>
       <FAQSection/>
       <TestimonialsSection/>
       <CTASection/>

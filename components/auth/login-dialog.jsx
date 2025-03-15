@@ -52,7 +52,7 @@ export default function LoginDialog({ children }) {
       <DialogTrigger asChild>
         {children}
       </DialogTrigger>
-      <DialogContent className="sm:max-w-md border border-primary/20 bg-gray-900/80 backdrop-blur-lg text-white">
+      <DialogContent className="sm:max-w-md border border-primary/20 bg-black/25 backdrop-blur-lg text-white">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-primary/80">
             Welcome Back

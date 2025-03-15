@@ -43,7 +43,7 @@ export default function AboutSection() {
   };
 
   return (
-    <section ref={sectionRef} className="bg-background py-32 relative overflow-hidden">
+    <section ref={sectionRef} className="bg-background py-32 relative overflow-hidden" id="about">
       {/* Simplified Decorative Elements */}
       <div className="absolute top-0 left-0 w-1/3 h-full bg-primary/5 -skew-x-12 transform origin-top-right opacity-40"></div>
       <div className="absolute right-0 w-64 h-64 rounded-full bg-accent/5 blur-3xl top-1/3"></div>

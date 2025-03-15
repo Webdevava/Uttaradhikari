@@ -3,18 +3,17 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import {
   SignIn,
-  UserPlus,
-  Lock,
-  EnvelopeSimple,
-  Clock,
-  CheckCircle,
+  FileText,
+  Sliders,
+  Bell,
+  ArrowCircleRight,
 } from "@phosphor-icons/react/dist/ssr";
 import { useRef, useState, useEffect } from "react";
 
 export default function HowItWorksSection() {
   const sectionRef = useRef(null);
   const [activeStep, setActiveStep] = useState(0);
-  const stepRefs = Array(6).fill(0).map(() => useRef(null));
+  const stepRefs = Array(5).fill(0).map(() => useRef(null));
   
   // Scroll animations
   const { scrollYProgress } = useScroll({
@@ -76,33 +75,28 @@ export default function HowItWorksSection() {
   const steps = [
     {
       icon: SignIn,
-      title: "Sign Up",
-      description: "Create your secure account with a simple login and two-factor authentication to begin protecting your legacy.",
+      title: "Sign Up & Secure Your Profile",
+      description: "Your data is encrypted. No one—not even us—can access it without your consent.",
     },
     {
-      icon: UserPlus,
-      title: "Add Nominees",
-      description: "Designate the loved ones or trusted individuals who will inherit your assets with customizable access levels.",
+      icon: FileText,
+      title: "Add & Organize Your Information",
+      description: "Store all your assets, debts, transactions, and nominee details.",
     },
     {
-      icon: Lock,
-      title: "Secure Your Details",
-      description: "Upload your financial, property, and personal details into our encrypted vault with military-grade protection.",
+      icon: Sliders,
+      title: "Set Rules for Access & Notifications",
+      description: "You control when and how your family receives this information.",
     },
     {
-      icon: EnvelopeSimple,
-      title: "Set Alerts",
-      description: "Define custom conditions—like unanswered messages or inactivity periods—to trigger the notification process.",
+      icon: Bell,
+      title: "Smart Inactivity Tracking",
+      description: "We attempt contact at least 3 times before confirming inactivity and notifying your nominee.",
     },
     {
-      icon: Clock,
-      title: "We Monitor",
-      description: "Our intelligent system watches silently, checking in only when needed while respecting your privacy at all times.",
-    },
-    {
-      icon: CheckCircle,
-      title: "Pass to Nominees",
-      description: "When the time comes, your legacy is securely shared with your chosen nominees through our verified handover process.",
+      icon: ArrowCircleRight,
+      title: "Data is Shared Only When Necessary",
+      description: "If we confirm something has happened, only then do we securely disclose your stored information to your nominees.",
     },
   ];
 

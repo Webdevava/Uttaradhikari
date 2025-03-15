@@ -8,6 +8,12 @@ import {
   Shield,
   FileText,
   EnvelopeSimple,
+  ChartPieSlice,
+  UserCirclePlus,
+  Bell,
+  Eye,
+  CreditCard,
+  ChartLine
 } from "@phosphor-icons/react/dist/ssr";
 
 export default function FeaturesSection() {
@@ -35,7 +41,7 @@ export default function FeaturesSection() {
   };
 
   return (
-    <section className="bg-background py-20">
+    <section className="bg-background py-20" id="features">
       <div className="container mx-auto px-6">
         <motion.div
           variants={sectionVariants}
@@ -57,7 +63,7 @@ export default function FeaturesSection() {
 
           {/* Features List */}
           <div className="grid md:grid-cols-2 gap-8">
-            {/* Secure Storage */}
+            {/* Secure Asset & Debt Storage */}
             <motion.div variants={itemVariants} className="flex items-start gap-4">
               <Lock
                 size={32}
@@ -66,83 +72,101 @@ export default function FeaturesSection() {
               />
               <div>
                 <h3 className="text-lg font-medium text-foreground">
-                  Fortified Storage
+                  Secure Asset & Debt Storage
                 </h3>
                 <p className="mt-1 text-muted-foreground">
-                  Your financial details, properties, and nominee information
-                  are encrypted and stored with unbreakable security.
+                  Your financial footprint, safeguarded until the right moment. Store all your transactions, 
+                  assets, debts—whether your family knows about them or not.
                 </p>
               </div>
             </motion.div>
 
-            {/* Timed Release */}
+            {/* Nominee Management */}
             <motion.div variants={itemVariants} className="flex items-start gap-4">
-              <Clock
+              <UserCirclePlus
                 size={32}
                 className="text-primary flex-shrink-0"
                 weight="duotone"
               />
               <div>
                 <h3 className="text-lg font-medium text-foreground">
-                  Perfectly Timed Release
+                  Nominee Management & Controlled Access
                 </h3>
                 <p className="mt-1 text-muted-foreground">
-                  Assets are shared only after careful verification—never too
-                  soon, always on time.
+                  Your loved ones should never be left in the dark. Assign nominees, define access levels, 
+                  and control when they receive the information.
                 </p>
               </div>
             </motion.div>
 
-            {/* Privacy Protection */}
+            {/* Smart Inactivity Detection */}
             <motion.div variants={itemVariants} className="flex items-start gap-4">
-              <Shield
+              <Bell
                 size={32}
                 className="text-primary flex-shrink-0"
                 weight="duotone"
               />
               <div>
                 <h3 className="text-lg font-medium text-foreground">
-                  Uncompromised Privacy
+                  Smart Inactivity Detection
                 </h3>
                 <p className="mt-1 text-muted-foreground">
-                  Your sensitive information stays hidden until you’re ready to
-                  pass it forward.
+                  Because mistakes are not an option. Before we disclose any information to your nominees, 
+                  we verify your inactivity at least 3 times through multiple communication channels.
                 </p>
               </div>
             </motion.div>
 
-            {/* Document Management */}
+            {/* Hidden or Delayed Asset Disclosure */}
             <motion.div variants={itemVariants} className="flex items-start gap-4">
-              <FileText
+              <Eye
                 size={32}
                 className="text-primary flex-shrink-0"
                 weight="duotone"
               />
               <div>
                 <h3 className="text-lg font-medium text-foreground">
-                  Seamless Documentation
+                  Hidden or Delayed Asset Disclosure
                 </h3>
                 <p className="mt-1 text-muted-foreground">
-                  Upload, organize, and assign your documents with ease—everything
-                  in one secure place.
+                  Protect your family's future the way you want. You decide when and how your financial 
+                  secrets are revealed, preventing sudden wealth from making them lazy or careless.
                 </p>
               </div>
             </motion.div>
 
-            {/* Smart Notifications */}
+            {/* Unaccounted Transactions */}
             <motion.div variants={itemVariants} className="flex items-start gap-4">
-              <EnvelopeSimple
+              <CreditCard
                 size={32}
                 className="text-primary flex-shrink-0"
                 weight="duotone"
               />
               <div>
                 <h3 className="text-lg font-medium text-foreground">
-                  Smart Notifications
+                  Unaccounted Transactions
                 </h3>
                 <p className="mt-1 text-muted-foreground">
-                  We check in periodically—five missed responses trigger your
-                  legacy plan with precision.
+                  Your secrets, protected and revealed on your terms. If you have transactions or assets that you want 
+                  to disclose only after your passing, you can store them here securely.
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Insights & Reports */}
+            <motion.div variants={itemVariants} className="flex items-start gap-4">
+              <ChartLine
+                size={32}
+                className="text-primary flex-shrink-0"
+                weight="duotone"
+              />
+              <div>
+                <h3 className="text-lg font-medium text-foreground">
+                  Insights & Reports
+                </h3>
+                <p className="mt-1 text-muted-foreground">
+                  Your financial roadmap, always clear. Understand your total assets, liabilities, 
+                  and nominee allocations with advanced analytics.
                 </p>
               </div>
             </motion.div>
