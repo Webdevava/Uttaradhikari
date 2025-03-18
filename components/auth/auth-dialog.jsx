@@ -281,7 +281,7 @@ export default function AuthDialog({ children, type: initialType = "login" }) {
       setTimeout(() => {
         setOpen(false);
         resetForm();
-        router.push("/"); // Redirect to home page
+        router.push("/dashboard"); // Redirect to home page
       }, 1500);
     } catch (error) {
       console.error("OTP verification error:", error);
