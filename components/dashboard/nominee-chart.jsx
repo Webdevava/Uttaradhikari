@@ -89,7 +89,7 @@ function NomineeShareChart() {
   const totalShare = pieData.reduce((sum, item) => sum + item.share, 0)
 
   return (
-    <Card className="w-full max-w-2xl h-full flex flex-col">
+    <Card className="w-full  h-full flex flex-col">
       <CardHeader className="flex flex-row items-center justify-between pb-2">
         <div>
           <CardTitle className="font-semibold text-xl">Nominee Distribution</CardTitle>

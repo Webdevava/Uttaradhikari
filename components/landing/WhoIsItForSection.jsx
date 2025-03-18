@@ -1,118 +1,159 @@
-// app/components/WhoIsItForSection.jsx
 "use client";
 
 import { motion } from "framer-motion";
+import { useRef } from "react";
 import {
-  User,
-  Users,
   House,
+  Briefcase,
+  PiggyBank,
+  Buildings,
+  Lock,
+  Person,
 } from "@phosphor-icons/react/dist/ssr";
 
-export default function WhoIsItForSection() {
-  const sectionVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.3,
-        delayChildren: 0.2,
-      },
-    },
-  };
+export default function AudienceSection() {
+  const sectionRef = useRef(null);
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 40 },
+  const sectionVariants = {
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.8,
+        duration: 0.6,
+        ease: "easeOut",
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, scale: 0.9 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 0.6,
         ease: "easeOut",
       },
     },
   };
 
+  const audienceGroups = [
+    {
+      icon: House,
+      title: "Families & Parents",
+      description:
+        "Ensure your loved ones don't suffer financially if something happens to you.",
+    },
+    {
+      icon: Briefcase,
+      title: "Working Professionals",
+      description:
+        "Your growing wealth and assets deserve to be tracked and secured for the future.",
+    },
+    {
+      icon: PiggyBank,
+      title: "Investors & Business Owners",
+      description:
+        "Keep your investments and debts organized—whether disclosed or hidden.",
+    },
+    {
+      icon: Buildings,
+      title: "Property Owners",
+      description:
+        "Manage your real estate, rental properties, and undisclosed investments in one place.",
+    },
+    {
+      icon: Lock,
+      title: "Individuals with Unreported Assets",
+      description:
+        "Safeguard and control access to your confidential transactions.",
+    },
+    {
+      icon: Person,
+      title: "Retirees & Senior Citizens",
+      description:
+        "Leave a well-organized legacy for your family. Because they should never have to struggle to find what matters.",
+    },
+  ];
+
   return (
-    <section className="bg-muted/20 py-20">
-      <div className="container mx-auto px-6">
+    <section
+      ref={sectionRef}
+      className="bg-background py-12 md:py-16 lg:py-20 relative overflow-hidden"
+      id="audience"
+    >
+      {/* Subtle Radial Background */}
+      <div className="absolute inset-0 z-0">
+        <div className="w-full h-full bg-gradient-radial from-primary/5 via-background to-background" />
+      </div>
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Heading */}
         <motion.div
           variants={sectionVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          className="text-center space-y-12"
+          viewport={{ once: true, amount: 0.2 }}
+          className="space-y-6 md:space-y-8 mb-10 md:mb-14 text-left"
         >
-          {/* Heading */}
-          <motion.div variants={itemVariants}>
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground">
-              Who{" "}
-              <span className="text-primary">We Serve</span>
+          <div className="bg-gradient-to-r from-primary/35 via-primary/15 to-transparent w-fit px-3 py-1 rounded-md">
+            <h2 className="text-sm md:text-base font-medium text-primary tracking-wide">
+              Our Audience
             </h2>
-            <p className="mt-4 text-xl text-muted-foreground max-w-2xl mx-auto">
-              Uttaradhikari is for anyone who wants to protect their life’s work
-              and pass it on with care.
-            </p>
-          </motion.div>
+          </div>
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight text-foreground">
+            Who Is This For?
+          </h1>
+          <p className="text-base md:text-lg text-muted-foreground max-w-2xl">
+            Smart Nominee was designed with everyone in mind. No matter your situation, we have solutions to protect what matters most to you.
+          </p>
+        </motion.div>
 
-          {/* Audience Cards */}
-          <motion.div variants={sectionVariants} className="grid md:grid-cols-3 gap-8">
-            {/* Individual */}
+        {/* Spotlight Carousel */}
+        <motion.div
+          variants={sectionVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto"
+        >
+          {audienceGroups.map((group, index) => (
             <motion.div
-              variants={itemVariants}
-              className="bg-background p-6 rounded-lg border border-border hover:border-primary/50 hover:bg-muted/50 transition-all"
+              key={index}
+              variants={cardVariants}
+              whileHover={{
+                scale: 1.05,
+                zIndex: 10,
+                boxShadow: "0 10px 20px rgba(0, 0, 0, 0.15)",
+              }}
+              className="bg-card rounded-lg border border-primary/10 p-6 flex flex-col items-center text-center shadow-md transition-all duration-300 relative overflow-hidden"
             >
-              <User
-                size={48}
-                className="text-primary mb-4 mx-auto"
-                weight="duotone"
-              />
-              <h3 className="text-xl font-semibold text-foreground">
-                Individuals
-              </h3>
-              <p className="mt-2 text-muted-foreground">
-                Secure your savings, investments, and wishes—ensuring they reach
-                your loved ones seamlessly.
-              </p>
-            </motion.div>
+              {/* Icon */}
+              <motion.div
+                whileHover={{ rotate: 10 }}
+                className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4"
+              >
+                <group.icon size={24} className="text-primary" weight="duotone" />
+              </motion.div>
 
-            {/* Families */}
-            <motion.div
-              variants={itemVariants}
-              className="bg-background p-6 rounded-lg border border-border hover:border-primary/50 hover:bg-muted/50 transition-all"
-            >
-              <Users
-                size={48}
-                className="text-primary mb-4 mx-auto"
-                weight="duotone"
-              />
-              <h3 className="text-xl font-semibold text-foreground">
-                Families
+              {/* Content */}
+              <h3 className="text-lg md:text-xl font-semibold text-foreground mb-3">
+                {group.title}
               </h3>
-              <p className="mt-2 text-muted-foreground">
-                Protect your family’s future with a plan that honors your
-                legacy and supports your heirs.
+              <p className="text-sm md:text-base text-muted-foreground">
+                {group.description}
               </p>
-            </motion.div>
 
-            {/* Property Owners */}
-            <motion.div
-              variants={itemVariants}
-              className="bg-background p-6 rounded-lg border border-border hover:border-primary/50 hover:bg-muted/50 transition-all"
-            >
-              <House
-                size={48}
-                className="text-primary mb-4 mx-auto"
-                weight="duotone"
+              {/* Spotlight Effect */}
+              <motion.div
+                className="absolute inset-0 bg-gradient-radial from-primary/10 to-transparent opacity-0"
+                whileHover={{ opacity: 1 }}
+                transition={{ duration: 0.3 }}
               />
-              <h3 className="text-xl font-semibold text-foreground">
-                Property Owners
-              </h3>
-              <p className="mt-2 text-muted-foreground">
-                Safeguard your assets—land, homes, or wealth—for those you
-                choose, when the time comes.
-              </p>
             </motion.div>
-          </motion.div>
+          ))}
         </motion.div>
       </div>
     </section>

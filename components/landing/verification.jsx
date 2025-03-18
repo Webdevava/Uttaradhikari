@@ -8,15 +8,19 @@ import {
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { SlidersHorizontal } from "@phosphor-icons/react";
+import { useRef } from "react";
 
 export default function NotificationsVerificationSection() {
+  const sectionRef = useRef(null);
+
   const sectionVariants = {
-    hidden: { opacity: 0 },
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
+      y: 0,
       transition: {
-        staggerChildren: 0.3,
-        delayChildren: 0.2,
+        duration: 0.6,
+        ease: "easeOut",
       },
     },
   };
@@ -34,24 +38,36 @@ export default function NotificationsVerificationSection() {
   };
 
   return (
-    <section className="bg-background py-24 relative overflow-hidden">
+    <section
+    ref={sectionRef}
+    className="bg-background py-12 md:py-16 lg:py-20 relative overflow-hidden"
+    id="verification"
+  >
       <div className="container mx-auto px-6">
         <motion.div
           variants={sectionVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
-          className="max-w-5xl mx-auto space-y-12"
+          className=" space-y-12"
         >
           {/* Heading */}
-          <motion.div variants={itemVariants} className="text-center">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground">
-              Notifications & Final Verification
+          <motion.div
+          variants={sectionVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          className="space-y-6 md:space-y-8 mb-10 md:mb-14 text-left"
+        >
+          <div className="bg-gradient-to-r from-primary/35 via-primary/15 to-transparent w-fit px-3 py-1 rounded-md">
+            <h2 className="text-sm md:text-base font-medium text-primary tracking-wide">
+              Verification
             </h2>
-            <p className="mt-4 text-xl text-muted-foreground">
-              Ensuring You Are Truly Inactive
-            </p>
-          </motion.div>
+          </div>
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight text-foreground">
+            Notifications & Final Verification
+          </h1>
+        </motion.div>
 
           {/* Main content */}
           <motion.div 
@@ -59,11 +75,11 @@ export default function NotificationsVerificationSection() {
             className="grid md:grid-cols-2 gap-8"
           >
             {/* Left column with cards */}
-            <div className="space-y-8">
+            <div className="space-y-8 grid">
               {/* No Immediate Notification */}
               <motion.div 
                 whileHover={{ y: -5 }}
-                className="bg-background p-6 rounded-xl border border-border hover:border-primary/50 shadow-sm hover:shadow-md transition-all"
+                className="bg-card p-6 rounded-xl border border-border hover:border-primary/50 shadow-sm hover:shadow-md transition-all"
               >
                 <div className="flex items-start gap-4">
                   <Bell 
@@ -88,7 +104,7 @@ export default function NotificationsVerificationSection() {
               {/* Final Confirmation Step */}
               <motion.div 
                 whileHover={{ y: -5 }}
-                className="bg-background p-6 rounded-xl border border-border hover:border-primary/50 shadow-sm hover:shadow-md transition-all"
+                className="bg-card p-6 rounded-xl border border-border hover:border-primary/50 shadow-sm hover:shadow-md transition-all"
               >
                 <div className="flex items-start gap-4">
                   <CheckCircle 
@@ -110,7 +126,7 @@ export default function NotificationsVerificationSection() {
               {/* Absolute Control */}
               <motion.div 
                 whileHover={{ y: -5 }}
-                className="bg-background p-6 rounded-xl border border-border hover:border-primary/50 shadow-sm hover:shadow-md transition-all"
+                className="bg-card p-6 rounded-xl border border-border hover:border-primary/50 shadow-sm hover:shadow-md transition-all"
               >
                 <div className="flex items-start gap-4">
                   <SlidersHorizontal
@@ -139,25 +155,23 @@ export default function NotificationsVerificationSection() {
                 className="relative p-10 bg-primary/5 rounded-2xl border border-primary/20"
               >
                 {/* Decorative elements */}
-                <div className="absolute -top-4 -right-4 w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center">
+                {/* <div className="absolute -top-4 -right-4 w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center">
                   <Bell size={24} className="text-primary" weight="fill" />
                 </div>
                 <div className="absolute -bottom-4 -left-4 w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center">
                   <CheckCircle size={24} className="text-primary" weight="fill" />
-                </div>
+                </div> */}
 
                 {/* Verification illustration */}
                 <div className="flex flex-col items-center space-y-4 mb-8">
                   <div className="w-32 h-32 bg-primary/10 rounded-full flex items-center justify-center">
-                    <motion.div
-                      animate={{ rotate: 360 }}
-                      transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                    <div
                       className="w-24 h-24 border-2 border-primary/30 border-dashed rounded-full flex items-center justify-center"
                     >
                       <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center">
                         <Bell size={32} className="text-primary" weight="duotone" />
                       </div>
-                    </motion.div>
+                    </div>
                   </div>
 
                   <div className="flex items-center space-x-2 my-4">
@@ -180,17 +194,20 @@ export default function NotificationsVerificationSection() {
 
                 {/* Verification Timeline */}
                 <div className="mt-8">
-                  <div className="relative pl-8 border-l-2 border-primary/30 space-y-4">
+                  <div className="relative pl-8  space-y-4">
                     <div className="relative">
                       <div className="absolute -left-10 top-1 w-4 h-4 bg-primary rounded-full"></div>
+                      <div className="w-0.5 h-8 bg-primary/20 absolute -left-[2.05rem] top-2"></div>
                       <p className="text-sm text-muted-foreground">First notification sent</p>
                     </div>
                     <div className="relative">
                       <div className="absolute -left-10 top-1 w-4 h-4 bg-primary rounded-full"></div>
+                      <div className="w-0.5 h-8 bg-primary/20 absolute -left-[2.05rem] top-2"></div>
                       <p className="text-sm text-muted-foreground">Follow-up check</p>
                     </div>
                     <div className="relative">
                       <div className="absolute -left-10 top-1 w-4 h-4 bg-primary rounded-full"></div>
+                      <div className="w-0.5 h-8 bg-primary/20 absolute -left-[2.05rem] top-2"></div>
                       <p className="text-sm text-muted-foreground">Final verification</p>
                     </div>
                     <div className="relative">
@@ -204,11 +221,6 @@ export default function NotificationsVerificationSection() {
           </motion.div>
         </motion.div>
       </div>
-
-      {/* Subtle Background Elements */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent pointer-events-none" />
-      <div className="absolute -bottom-48 -right-48 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-      <div className="absolute -top-48 -left-48 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
     </section>
   );
 }

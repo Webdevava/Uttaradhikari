@@ -1,70 +1,16 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import {
-  SignIn,
-  FileText,
-  Sliders,
-  Bell,
-  ArrowCircleRight,
-} from "@phosphor-icons/react/dist/ssr";
-import { useRef, useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { useRef } from "react";
 
-export default function HowItWorksSection() {
+export default function ProcessSection() {
   const sectionRef = useRef(null);
-  const [activeStep, setActiveStep] = useState(0);
-  const stepRefs = Array(5).fill(0).map(() => useRef(null));
-  
-  // Scroll animations
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"]
-  });
-  
-  const progressLineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
-  
-  // Check which step is in view
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const index = parseInt(entry.target.dataset.index);
-            setActiveStep(index);
-          }
-        });
-      },
-      { threshold: 0.7 }
-    );
-
-    stepRefs.forEach((ref) => {
-      if (ref.current) observer.observe(ref.current);
-    });
-
-    return () => {
-      stepRefs.forEach((ref) => {
-        if (ref.current) observer.unobserve(ref.current);
-      });
-    };
-  }, []);
 
   const sectionVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.3,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
-  const stepVariants = {
-    hidden: { opacity: 0, y: 30, scale: 0.95 },
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
-      scale: 1,
       transition: {
         duration: 0.6,
         ease: "easeOut",
@@ -74,126 +20,108 @@ export default function HowItWorksSection() {
 
   const steps = [
     {
-      icon: SignIn,
+      step: "1",
       title: "Sign Up & Secure Your Profile",
-      description: "Your data is encrypted. No one—not even us—can access it without your consent.",
+      description:
+        "Your data is encrypted. No one—not even us—can access it without your consent.",
     },
     {
-      icon: FileText,
+      step: "2",
       title: "Add & Organize Your Information",
-      description: "Store all your assets, debts, transactions, and nominee details.",
+      description:
+        "Store all your assets, debts, transactions, and nominee details.",
     },
     {
-      icon: Sliders,
+      step: "3",
       title: "Set Rules for Access & Notifications",
-      description: "You control when and how your family receives this information.",
+      description:
+        "You control when and how your family receives this information.",
     },
     {
-      icon: Bell,
+      step: "4",
       title: "Smart Inactivity Tracking",
-      description: "We attempt contact at least 3 times before confirming inactivity and notifying your nominee.",
+      description:
+        "We attempt contact at least 3 times before confirming inactivity and notifying your nominee.",
     },
     {
-      icon: ArrowCircleRight,
+      step: "5",
       title: "Data is Shared Only When Necessary",
-      description: "If we confirm something has happened, only then do we securely disclose your stored information to your nominees.",
+      description:
+        "If we confirm something has happened, only then do we securely disclose your stored information to your nominees.",
     },
   ];
 
   return (
-    <section ref={sectionRef} className="bg-background py-24 relative overflow-hidden">
-      <div className="container mx-auto px-6">
-        <motion.div
-          variants={sectionVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          className="space-y-16"
-        >
-          {/* Heading */}
-          <motion.div variants={stepVariants} className="text-center">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground">
-              How It{" "}
-              <span className="text-primary relative inline-block">
-                Works
-                <motion.span
-                  className="absolute -bottom-2 left-0 w-full h-1 bg-primary/70 rounded-full"
-                  initial={{ width: 0 }}
-                  whileInView={{ width: "100%" }}
-                  transition={{ delay: 0.5, duration: 0.8 }}
-                />
-              </span>
-            </h2>
-            <p className="mt-6 text-xl text-muted-foreground max-w-2xl mx-auto">
-              A seamless journey from safeguarding your life's work to passing it on with care and precision.
+    <section
+      ref={sectionRef}
+      className="bg-background py-12 md:py-16 lg:py-20"
+      id="process"
+    >
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col lg:flex-row lg:gap-12">
+          {/* Heading - Left Side on Large Screens */}
+          <motion.div
+            variants={sectionVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            className="space-y-6 md:space-y-8 mb-10 md:mb-14 lg:mb-0 lg:w-1/2"
+          >
+            <div className="bg-gradient-to-r from-primary/35 via-primary/15 to-transparent w-fit px-3 py-1 rounded-md">
+              <h2 className="text-sm md:text-base font-medium text-primary tracking-wide">
+                Our Process
+              </h2>
+            </div>
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">
+              How It Works – The Safety Process
+            </h1>
+            <p className="text-base md:text-lg text-muted-foreground max-w-2xl">
+              We've created a secure and transparent system to protect your information while ensuring it reaches the right people at the right time.
             </p>
           </motion.div>
 
-          {/* Progress Line */}
-          <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 top-[300px] bottom-[100px] w-1 bg-muted/30 rounded-full overflow-hidden">
-            <motion.div 
-              className="w-full bg-primary rounded-full"
-              style={{ height: progressLineHeight }}
-            />
-          </div>
+          {/* Timeline - Right Side on Large Screens */}
+          <div className="lg:w-1/2">
+            {steps.map((step, index) => (
+              <motion.div
+                key={index}
+                variants={sectionVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.2 }}
+                className="relative mb-8 last:mb-0"
+              >
+                {/* Horizontal Line */}
+                {/* <div className="w-1 h-10 bg-primary/20 absolute left-0 top-8"></div> */}
 
-          {/* Steps Timeline */}
-          <div className="relative max-w-5xl mx-auto">
-            <div className="space-y-16 md:space-y-24">
-              {steps.map((step, index) => (
-                <motion.div
-                  key={index}
-                  ref={stepRefs[index]}
-                  data-index={index}
-                  variants={stepVariants}
-                  className={`md:flex items-center ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}
-                >
-                  {/* Step icon - larger for desktop */}
-                  <motion.div 
-                    className="hidden md:flex relative w-32 h-32 bg-primary/10 rounded-xl items-center justify-center shrink-0 mx-8"
-                    whileInView={{ scale: [0.8, 1.1, 1], rotate: [0, 10, 0] }}
-                    transition={{ duration: 0.8 }}
-                  >
-                    <step.icon size={48} className="text-primary" weight="duotone" />
-                    <div className={`absolute w-3 h-3 bg-primary rounded-full ${index % 2 === 0 ? 'right-0 translate-x-1/2' : 'left-0 -translate-x-1/2'} top-1/2 -translate-y-1/2`} />
-                    
-                    {/* Step number */}
-                    <div className="absolute -top-2 -right-2 w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center font-bold text-sm">
-                      {index + 1}
-                    </div>
-                  </motion.div>
+                <div className="flex items-start">
+                  {/* Step Number Circle */}
+                  <div className="flex-shrink-0 w-16 h-16 flex items-center justify-center bg-primary/10 rounded-full mr-4 relative z-10">
+                    <span className="text-xl font-bold text-primary">
+                      {step.step}
+                    </span>
+                  </div>
 
-                  {/* Step content */}
-                  <motion.div 
-                    className="relative bg-background p-7 rounded-xl border border-border shadow-sm hover:shadow-md hover:border-primary/50 transition-all z-10 max-w-xl mx-auto md:mx-0"
-                    whileHover={{ y: -5 }}
-                  >
-                    {/* Mobile icon with number */}
-                    <div className="md:hidden absolute -top-4 -left-4 w-14 h-14 bg-primary/20 rounded-full flex items-center justify-center">
-                      <step.icon size={28} className="text-primary" weight="duotone" />
-                      <div className="absolute -top-1 -right-1 w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center font-bold text-xs">
-                        {index + 1}
-                      </div>
-                    </div>
-                    
-                    <h3 className="text-2xl font-semibold text-foreground mt-6 md:mt-0">
+                  {/* Content */}
+                  <div className="flex-grow">
+                    <h3 className="text-lg md:text-xl font-semibold text-foreground mb-2">
                       {step.title}
                     </h3>
-                    <p className="mt-3 text-muted-foreground text-lg">
+                    <p className="text-sm md:text-base text-muted-foreground leading-relaxed max-w-md">
                       {step.description}
                     </p>
-                  </motion.div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </motion.div>
-      </div>
+                  </div>
+                </div>
 
-      {/* Subtle Background Elements */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent pointer-events-none" />
-      <div className="absolute -bottom-48 -right-48 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-      <div className="absolute -top-48 -left-48 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+                {/* Connecting Vertical Line */}
+                {index < steps.length - 1 && (
+                  <div className="w-0.5 h-14 bg-primary/20 absolute left-8 top-16"></div>
+                )}
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
     </section>
   );
 }

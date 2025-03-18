@@ -10,14 +10,21 @@ import PricingSection from "@/components/landing/pricing";
 import TestimonialsSection from "@/components/landing/testimonials";
 import NotificationsVerificationSection from "@/components/landing/verification";
 import SecurityPrivacySection from "@/components/landing/security";
+import Navbar from "@/components/landing/navbar";
+import WhyChooseUsSection from "@/components/landing/why-choose-us";
 
 export default function Home() {
   return (
     <main>
+      <div className="bg-primary">
+
+      <Navbar/>
+      </div>
       <HeroSection />
       <AboutSection />
       <WhoIsItForSection/>
       <FeaturesSection/>
+      <WhyChooseUsSection/>
       <HowItWorksSection/>
       <PricingSection/>
       <NotificationsVerificationSection/>
