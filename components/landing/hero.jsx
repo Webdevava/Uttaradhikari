@@ -25,7 +25,7 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative min-h-screen w-full overflow-hidden bg-gradient-to-b from-primary via-background to-background flex flex-col justify-between pt-20 pb-0">
+    <section className="relative min-h-screen w-full overflow-hidden bg-gradient-to-b from-primary via-primary to-background flex flex-col justify-between pt-20 pb-0">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex-grow flex items-center">
         <motion.div
           className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center w-full"
@@ -39,11 +39,11 @@ export default function Hero() {
             className="space-y-6 md:space-y-8 text-center lg:text-left max-w-lg mx-auto lg:max-w-none lg:mx-0"
           >
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-foreground">
-              <span className="block text-primary">Your Life. Your Legacy.</span>
-              <span className="block text-primary">Protected</span>
+              <span className="block text-white">Your Life. Your Legacy.</span>
+              <span className="block text-white">Protected</span>
               <span className="block text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold"> & Shared Only When It Matters.</span>
             </h1>
-            <p className="text-base sm:text-lg md:text-xl text-muted-foreground">
+            <p className="text-base sm:text-lg md:text-lg text-foreground">
             Your hard-earned assets, your hidden investments, and your responsibilities should never be lost or forgotten. Store them securely and ensure they reach your loved ones at the right time, in the right way.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">

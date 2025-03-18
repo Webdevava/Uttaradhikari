@@ -82,7 +82,7 @@ export default function PricingSection() {
   return (
     <section
       ref={sectionRef}
-      className="bg-background py-12 md:py-16 lg:py-20"
+      className="bg-background py-8 md:py-12 lg:py-16"
       id="pricing"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -92,30 +92,30 @@ export default function PricingSection() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
-          className="space-y-6 md:space-y-8 mb-10 md:mb-14"
+          className="space-y-4 md:space-y-6 mb-8 md:mb-12 text-left"
         >
-          <div className="bg-gradient-to-r from-primary/35 via-primary/15 to-transparent w-fit px-3 py-1 rounded-md">
+          <div className="bg-gradient-to-r from-primary/35 via-primary/15 to-transparent w-fit px-3 py-1 rounded-md ">
             <h2 className="text-sm md:text-base font-medium text-primary tracking-wide">
               Pricing
             </h2>
           </div>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
             Pricing Plans
           </h1>
-          <p className="text-base md:text-lg text-muted-foreground max-w-2xl">
+          <p className="text-sm md:text-base lg:text-lg text-muted-foreground max-w-2xl ">
             Flexible plans to suit your needs. Choose what fits you best and get the security and control you deserve.
           </p>
         </motion.div>
 
         {/* Tabs */}
         <Tabs defaultValue="plans" className="w-full">
-          <TabsList className="grid grid-cols-2 w-56 mx-auto mb-8">
-          <TabsTrigger value="plans" className="flex items-center gap-2">
-              <Calendar size={18} weight="duotone" />
+          <TabsList className="grid grid-cols-2 w-48 sm:w-56 mx-auto mb-6 md:mb-8">
+            <TabsTrigger value="plans" className="flex items-center gap-2 text-xs sm:text-sm">
+              <Calendar size={16} weight="duotone" />
               Plans
             </TabsTrigger>
-            <TabsTrigger value="comparison" className="flex items-center gap-2">
-              <Table size={18} weight="duotone" />
+            <TabsTrigger value="comparison" className="flex items-center gap-2 text-xs sm:text-sm">
+              <Table size={16} weight="duotone" />
               Compare
             </TabsTrigger>
           </TabsList>
@@ -127,29 +127,29 @@ export default function PricingSection() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.2 }}
-              className="overflow-auto container mx-auto bg-card rounded-lg border border-primary/10 shadow-sm"
+              className="overflow-x-auto bg-card rounded-lg border border-primary/10 shadow-sm"
             >
               <table className="w-full min-w-[600px]">
                 <thead>
                   <tr className="bg-muted/70">
-                    <th className="p-4 text-left font-semibold text-lg text-foreground border-b">
+                    <th className="p-3 sm:p-4 text-left font-semibold text-sm sm:text-lg text-foreground border-b">
                       Feature
                     </th>
-                    <th className="p-4 text-center font-semibold text-lg text-foreground border-b whitespace-nowrap w-24">
+                    <th className="p-3 sm:p-4 text-center font-semibold text-sm sm:text-lg text-foreground border-b w-20 sm:w-24">
                       <div className="flex flex-col items-center">
-                        <CaretUp size={20} weight="duotone" className="mb-1" />
+                        <CaretUp size={16} weight="duotone" className="mb-1" />
                         Free
                       </div>
                     </th>
-                    <th className="p-4 text-center font-semibold text-lg text-primary border-b whitespace-nowrap w-24">
+                    <th className="p-3 sm:p-4 text-center font-semibold text-sm sm:text-lg text-primary border-b w-20 sm:w-24">
                       <div className="flex flex-col items-center">
-                        <Star size={20} weight="duotone" className="mb-1" />
+                        <Star size={16} weight="duotone" className="mb-1" />
                         Standard
                       </div>
                     </th>
-                    <th className="p-4 text-center font-semibold text-lg text-foreground border-b whitespace-nowrap w-24">
+                    <th className="p-3 sm:p-4 text-center font-semibold text-sm sm:text-lg text-foreground border-b w-20 sm:w-24">
                       <div className="flex flex-col items-center">
-                        <Crown size={20} weight="duotone" className="mb-1" />
+                        <Crown size={16} weight="duotone" className="mb-1" />
                         Premium
                       </div>
                     </th>
@@ -158,119 +158,119 @@ export default function PricingSection() {
                 <tbody>
                   {/* Storage Features */}
                   <tr className="bg-muted/40">
-                    <td colSpan={4} className="p-3 pl-4 font-medium text-foreground">
+                    <td colSpan={4} className="p-2 sm:p-3 pl-4 font-medium text-foreground text-sm sm:text-base">
                       Storage Features
                     </td>
                   </tr>
                   <tr className="border-b border-primary/20 hover:bg-muted/20 transition-colors">
-                    <td className="p-3 pl-4 text-sm">Secure Personal Data Storage</td>
-                    <td className="p-3 text-center">Limited</td>
-                    <td className="p-3 text-center">{renderFeatureValue(true)}</td>
-                    <td className="p-3 text-center">{renderFeatureValue(true)}</td>
+                    <td className="p-2 sm:p-3 pl-4 text-xs sm:text-sm">Secure Personal Data Storage</td>
+                    <td className="p-2 sm:p-3 text-center text-xs sm:text-sm">Limited</td>
+                    <td className="p-2 sm:p-3 text-center">{renderFeatureValue(true)}</td>
+                    <td className="p-2 sm:p-3 text-center">{renderFeatureValue(true)}</td>
                   </tr>
                   <tr className="border-b border-primary/20 hover:bg-muted/20 transition-colors">
-                    <td className="p-3 pl-4 text-sm">Bank Accounts, FD/RD, EPF/PPF Tracking</td>
-                    <td className="p-3 text-center">Limited</td>
-                    <td className="p-3 text-center">{renderFeatureValue(true)}</td>
-                    <td className="p-3 text-center">{renderFeatureValue(true)}</td>
+                    <td className="p-2 sm:p-3 pl-4 text-xs sm:text-sm">Bank Accounts, FD/RD, EPF/PPF Tracking</td>
+                    <td className="p-2 sm:p-3 text-center text-xs sm:text-sm">Limited</td>
+                    <td className="p-2 sm:p-3 text-center">{renderFeatureValue(true)}</td>
+                    <td className="p-2 sm:p-3 text-center">{renderFeatureValue(true)}</td>
                   </tr>
                   <tr className="border-b border-primary/20 hover:bg-muted/20 transition-colors">
-                    <td className="p-3 pl-4 text-sm">Insurance (Life, Health, Vehicle, etc.)</td>
-                    <td className="p-3 text-center">Limited</td>
-                    <td className="p-3 text-center">{renderFeatureValue(true)}</td>
-                    <td className="p-3 text-center">{renderFeatureValue(true)}</td>
+                    <td className="p-2 sm:p-3 pl-4 text-xs sm:text-sm">Insurance (Life, Health, Vehicle, etc.)</td>
+                    <td className="p-2 sm:p-3 text-center text-xs sm:text-sm">Limited</td>
+                    <td className="p-2 sm:p-3 text-center">{renderFeatureValue(true)}</td>
+                    <td className="p-2 sm:p-3 text-center">{renderFeatureValue(true)}</td>
                   </tr>
                   <tr className="border-b border-primary/20 hover:bg-muted/20 transition-colors">
-                    <td className="p-3 pl-4 text-sm">Investments (Stocks, Mutual Funds, Crypto)</td>
-                    <td className="p-3 text-center">{renderFeatureValue(false)}</td>
-                    <td className="p-3 text-center">{renderFeatureValue(true)}</td>
-                    <td className="p-3 text-center">{renderFeatureValue(true)}</td>
+                    <td className="p-2 sm:p-3 pl-4 text-xs sm:text-sm">Investments (Stocks, Mutual Funds, Crypto)</td>
+                    <td className="p-2 sm:p-3 text-center">{renderFeatureValue(false)}</td>
+                    <td className="p-2 sm:p-3 text-center">{renderFeatureValue(true)}</td>
+                    <td className="p-2 sm:p-3 text-center">{renderFeatureValue(true)}</td>
                   </tr>
                   <tr className="border-b border-primary/20 hover:bg-muted/20 transition-colors">
-                    <td className="p-3 pl-4 text-sm">Gold/Silver/Ornaments Asset Tracking</td>
-                    <td className="p-3 text-center">{renderFeatureValue(false)}</td>
-                    <td className="p-3 text-center">{renderFeatureValue(true)}</td>
-                    <td className="p-3 text-center">{renderFeatureValue(true)}</td>
+                    <td className="p-2 sm:p-3 pl-4 text-xs sm:text-sm">Gold/Silver/Ornaments Asset Tracking</td>
+                    <td className="p-2 sm:p-3 text-center">{renderFeatureValue(false)}</td>
+                    <td className="p-2 sm:p-3 text-center">{renderFeatureValue(true)}</td>
+                    <td className="p-2 sm:p-3 text-center">{renderFeatureValue(true)}</td>
                   </tr>
                   <tr className="border-b border-primary/20 hover:bg-muted/20 transition-colors">
-                    <td className="p-3 pl-4 text-sm">Property & Utility Bill Management</td>
-                    <td className="p-3 text-center">{renderFeatureValue(false)}</td>
-                    <td className="p-3 text-center">{renderFeatureValue(true)}</td>
-                    <td className="p-3 text-center">{renderFeatureValue(true)}</td>
+                    <td className="p-2 sm:p-3 pl-4 text-xs sm:text-sm">Property & Utility Bill Management</td>
+                    <td className="p-2 sm:p-3 text-center">{renderFeatureValue(false)}</td>
+                    <td className="p-2 sm:p-3 text-center">{renderFeatureValue(true)}</td>
+                    <td className="p-2 sm:p-3 text-center">{renderFeatureValue(true)}</td>
                   </tr>
 
                   {/* Nominee & Security Features */}
                   <tr className="bg-muted/40">
-                    <td colSpan={4} className="p-3 pl-4 font-medium text-foreground">
+                    <td colSpan={4} className="p-2 sm:p-3 pl-4 font-medium text-foreground text-sm sm:text-base">
                       Nominee & Security Features
                     </td>
                   </tr>
                   <tr className="border-b border-primary/20 hover:bg-muted/20 transition-colors">
-                    <td className="p-3 pl-4 text-sm">Nominee Assignment & Notifications</td>
-                    <td className="p-3 text-center">1 Nominee</td>
-                    <td className="p-3 text-center">Up to 5</td>
-                    <td className="p-3 text-center">Unlimited</td>
+                    <td className="p-2 sm:p-3 pl-4 text-xs sm:text-sm">Nominee Assignment & Notifications</td>
+                    <td className="p-2 sm:p-3 text-center text-xs sm:text-sm">1 Nominee</td>
+                    <td className="p-2 sm:p-3 text-center text-xs sm:text-sm">Up to 5</td>
+                    <td className="p-2 sm:p-3 text-center text-xs sm:text-sm">Unlimited</td>
                   </tr>
                   <tr className="border-b border-primary/20 hover:bg-muted/20 transition-colors">
-                    <td className="p-3 pl-4 text-sm">Secure Document Upload & Storage</td>
-                    <td className="p-3 text-center">{renderFeatureValue(false)}</td>
-                    <td className="p-3 text-center">Up to 10 Docs</td>
-                    <td className="p-3 text-center">Unlimited</td>
+                    <td className="p-2 sm:p-3 pl-4 text-xs sm:text-sm">Secure Document Upload & Storage</td>
+                    <td className="p-2 sm:p-3 text-center">{renderFeatureValue(false)}</td>
+                    <td className="p-2 sm:p-3 text-center text-xs sm:text-sm">Up to 10 Docs</td>
+                    <td className="p-2 sm:p-3 text-center text-xs sm:text-sm">Unlimited</td>
                   </tr>
                   <tr className="border-b border-primary/20 hover:bg-muted/20 transition-colors">
-                    <td className="p-3 pl-4 text-sm">Inactivity Verification (Triple Check)</td>
-                    <td className="p-3 text-center">{renderFeatureValue(true)}</td>
-                    <td className="p-3 text-center">{renderFeatureValue(true)}</td>
-                    <td className="p-3 text-center">{renderFeatureValue(true)}</td>
+                    <td className="p-2 sm:p-3 pl-4 text-xs sm:text-sm">Inactivity Verification (Triple Check)</td>
+                    <td className="p-2 sm:p-3 text-center">{renderFeatureValue(true)}</td>
+                    <td className="p-2 sm:p-3 text-center">{renderFeatureValue(true)}</td>
+                    <td className="p-2 sm:p-3 text-center">{renderFeatureValue(true)}</td>
                   </tr>
                   <tr className="border-b border-primary/20 hover:bg-muted/20 transition-colors">
-                    <td className="p-3 pl-4 text-sm">Custom Time Delay for Nominee Disclosure</td>
-                    <td className="p-3 text-center">{renderFeatureValue(false)}</td>
-                    <td className="p-3 text-center">{renderFeatureValue(true)}</td>
-                    <td className="p-3 text-center">{renderFeatureValue(true)}</td>
+                    <td className="p-2 sm:p-3 pl-4 text-xs sm:text-sm">Custom Time Delay for Nominee Disclosure</td>
+                    <td className="p-2 sm:p-3 text-center">{renderFeatureValue(false)}</td>
+                    <td className="p-2 sm:p-3 text-center">{renderFeatureValue(true)}</td>
+                    <td className="p-2 sm:p-3 text-center">{renderFeatureValue(true)}</td>
                   </tr>
 
                   {/* Advanced Features */}
                   <tr className="bg-muted/40">
-                    <td colSpan={4} className="p-3 pl-4 font-medium text-foreground">
+                    <td colSpan={4} className="p-2 sm:p-3 pl-4 font-medium text-foreground text-sm sm:text-base">
                       Advanced Features
                     </td>
                   </tr>
                   <tr className="border-b border-primary/20 hover:bg-muted/20 transition-colors">
-                    <td className="p-3 pl-4 text-sm">Alerts & Reminders for Financial Planning</td>
-                    <td className="p-3 text-center">Limited</td>
-                    <td className="p-3 text-center">{renderFeatureValue(true)}</td>
-                    <td className="p-3 text-center">{renderFeatureValue(true)}</td>
+                    <td className="p-2 sm:p-3 pl-4 text-xs sm:text-sm">Alerts & Reminders for Financial Planning</td>
+                    <td className="p-2 sm:p-3 text-center text-xs sm:text-sm">Limited</td>
+                    <td className="p-2 sm:p-3 text-center">{renderFeatureValue(true)}</td>
+                    <td className="p-2 sm:p-3 text-center">{renderFeatureValue(true)}</td>
                   </tr>
                   <tr className="border-b border-primary/20 hover:bg-muted/20 transition-colors">
-                    <td className="p-3 pl-4 text-sm">Advanced Analytics & Reports</td>
-                    <td className="p-3 text-center">{renderFeatureValue(false)}</td>
-                    <td className="p-3 text-center">{renderFeatureValue(true)}</td>
-                    <td className="p-3 text-center">{renderFeatureValue(true)}</td>
+                    <td className="p-2 sm:p-3 pl-4 text-xs sm:text-sm">Advanced Analytics & Reports</td>
+                    <td className="p-2 sm:p-3 text-center">{renderFeatureValue(false)}</td>
+                    <td className="p-2 sm:p-3 text-center">{renderFeatureValue(true)}</td>
+                    <td className="p-2 sm:p-3 text-center">{renderFeatureValue(true)}</td>
                   </tr>
                   <tr className="border-b border-primary/20 hover:bg-muted/20 transition-colors">
-                    <td className="p-3 pl-4 text-sm">Downloadable PDF/Excel Reports</td>
-                    <td className="p-3 text-center">{renderFeatureValue(false)}</td>
-                    <td className="p-3 text-center">{renderFeatureValue(true)}</td>
-                    <td className="p-3 text-center">{renderFeatureValue(true)}</td>
+                    <td className="p-2 sm:p-3 pl-4 text-xs sm:text-sm">Downloadable PDF/Excel Reports</td>
+                    <td className="p-2 sm:p-3 text-center">{renderFeatureValue(false)}</td>
+                    <td className="p-2 sm:p-3 text-center">{renderFeatureValue(true)}</td>
+                    <td className="p-2 sm:p-3 text-center">{renderFeatureValue(true)}</td>
                   </tr>
                   <tr className="border-b border-primary/20 hover:bg-muted/20 transition-colors">
-                    <td className="p-3 pl-4 text-sm">Undocumented Money & Hidden Transactions Storage</td>
-                    <td className="p-3 text-center">{renderFeatureValue(false)}</td>
-                    <td className="p-3 text-center">{renderFeatureValue(false)}</td>
-                    <td className="p-3 text-center">{renderFeatureValue(true)}</td>
+                    <td className="p-2 sm:p-3 pl-4 text-xs sm:text-sm">Undocumented Money & Hidden Transactions Storage</td>
+                    <td className="p-2 sm:p-3 text-center">{renderFeatureValue(false)}</td>
+                    <td className="p-2 sm:p-3 text-center">{renderFeatureValue(false)}</td>
+                    <td className="p-2 sm:p-3 text-center">{renderFeatureValue(true)}</td>
                   </tr>
                   <tr className="border-b border-primary/20 hover:bg-muted/20 transition-colors">
-                    <td className="p-3 pl-4 text-sm">24/7 Priority Customer Support</td>
-                    <td className="p-3 text-center">{renderFeatureValue(false)}</td>
-                    <td className="p-3 text-center">{renderFeatureValue(true)}</td>
-                    <td className="p-3 text-center">{renderFeatureValue(true)}</td>
+                    <td className="p-2 sm:p-3 pl-4 text-xs sm:text-sm">24/7 Priority Customer Support</td>
+                    <td className="p-2 sm:p-3 text-center">{renderFeatureValue(false)}</td>
+                    <td className="p-2 sm:p-3 text-center">{renderFeatureValue(true)}</td>
+                    <td className="p-2 sm:p-3 text-center">{renderFeatureValue(true)}</td>
                   </tr>
                   <tr className="border-b border-primary/20 hover:bg-muted/20 transition-colors">
-                    <td className="p-3 pl-4 text-sm">Customizable Notification Preferences</td>
-                    <td className="p-3 text-center">{renderFeatureValue(false)}</td>
-                    <td className="p-3 text-center">{renderFeatureValue(true)}</td>
-                    <td className="p-3 text-center">{renderFeatureValue(true)}</td>
+                    <td className="p-2 sm:p-3 pl-4 text-xs sm:text-sm">Customizable Notification Preferences</td>
+                    <td className="p-2 sm:p-3 text-center">{renderFeatureValue(false)}</td>
+                    <td className="p-2 sm:p-3 text-center">{renderFeatureValue(true)}</td>
+                    <td className="p-2 sm:p-3 text-center">{renderFeatureValue(true)}</td>
                   </tr>
                 </tbody>
               </table>
@@ -284,11 +284,11 @@ export default function PricingSection() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.2 }}
-              className="flex items-center justify-center gap-2 md:gap-8 mt-8 "
+              className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-4 md:gap-6 lg:gap-8 mt-6"
             >
               {plans.map((plan, index) => {
                 const isActive = activePlan === index;
-                const bgColor = index === 1 ? "bg-primary" : "bg-card"; // Middle plan uses bg-primary, others use bg-card
+                const bgColor = index === 1 ? "bg-primary" : "bg-card";
 
                 return (
                   <motion.div
@@ -298,59 +298,59 @@ export default function PricingSection() {
                     whileInView="visible"
                     viewport={{ once: true, amount: 0.2 }}
                     onClick={() => setActivePlan(index)}
-                    className={`relative rounded-lg w-80 overflow-hidden border border-primary/10 transition-colors duration-300 cursor-pointer
+                    className={`relative rounded-lg w-full max-w-xs sm:max-w-sm md:max-w-md lg:w-80 overflow-hidden border border-primary/10 transition-colors duration-300 cursor-pointer
                       ${bgColor} ${isActive ? "shadow-lg scale-105" : "hover:shadow-md"}`}
                   >
                     {/* Plan Header */}
-                    <div className="p-6 ">
+                    <div className="p-4 sm:p-6">
                       <div className="flex items-center justify-between">
                         <div>
-                          <h3 className={`text-lg md:text-xl font-semibold ${index === 1 ? "text-white" : "text-foreground"}`}>
+                          <h3 className={`text-base sm:text-lg md:text-xl font-semibold ${index === 1 ? "text-white" : "text-foreground"}`}>
                             {plan.name}
                           </h3>
-                          <p className={`text-sm mt-1 ${index === 1 ? "text-white/80" : "text-muted-foreground"}`}>
+                          <p className={`text-xs sm:text-sm mt-1 ${index === 1 ? "text-white/80" : "text-muted-foreground"}`}>
                             {plan.tagline}
                           </p>
                         </div>
                         <plan.icon
-                          size={24}
+                          size={20} sm={24}
                           weight="duotone"
                           className={index === 1 ? "text-white/90" : "text-primary"}
                         />
                       </div>
-                      <div className="mt-4 flex items-baseline">
-                        <span className={`text-3xl font-bold ${index === 1 ? "text-white" : "text-foreground"}`}>
+                      <div className="mt-3 sm:mt-4 flex items-baseline">
+                        <span className={`text-2xl sm:text-3xl font-bold ${index === 1 ? "text-white" : "text-foreground"}`}>
                           {plan.price}
                         </span>
-                        <span className={`ml-1 ${index === 1 ? "text-white/80" : "text-muted-foreground"}`}>
+                        <span className={`ml-1 text-xs sm:text-sm ${index === 1 ? "text-white/80" : "text-muted-foreground"}`}>
                           {plan.period}
                         </span>
                       </div>
                       {plan.badge && (
-                        <div className=" absolute bg-yellow-400 text-black text-xs font-bold px-2 py-1 rounded-full top-0 right-0">
+                        <div className="absolute bg-yellow-400 text-black text-xs font-bold px-2 py-1 rounded-full top-2 right-2">
                           {plan.badge}
                         </div>
                       )}
                     </div>
 
                     {/* Features */}
-                    <div className="p-6 pt-0 space-y-3">
+                    <div className="p-4 sm:p-6 pt-0 space-y-2 sm:space-y-3">
                       {plan.features.map((feature, i) => (
                         <div
                           key={i}
-                          className="flex items-center gap-3"
+                          className="flex items-center gap-2 sm:gap-3"
                         >
                           <div
-                            className={`w-5 h-5 rounded-full flex items-center justify-center
+                            className={`w-4 h-4 sm:w-5 sm:h-5 rounded-full flex items-center justify-center
                               ${feature.available ? "bg-primary text-white" : "bg-muted text-muted-foreground"}`}
                           >
                             {feature.available ? (
-                              <Check size={12} weight="bold" />
+                              <Check size={10} sm={12} weight="bold" />
                             ) : (
-                              <X size={12} />
+                              <X size={10} sm={12} />
                             )}
                           </div>
-                          <span className={`text-sm font-medium ${index === 1 ? "text-white/90" : "text-foreground"}`}>
+                          <span className={`text-xs sm:text-sm font-medium ${index === 1 ? "text-white/90" : "text-foreground"}`}>
                             {feature.text}
                           </span>
                         </div>
@@ -358,9 +358,9 @@ export default function PricingSection() {
                     </div>
 
                     {/* CTA Button */}
-                    <div className="p-6 pt-0">
+                    <div className="p-4 sm:p-6 pt-0">
                       <Button
-                        className={`w-full py-4 rounded-lg font-medium
+                        className={`w-full py-3 sm:py-4 rounded-lg font-medium text-xs sm:text-sm
                           ${isActive
                             ? index === 1
                               ? "bg-white text-primary hover:bg-white/90"
@@ -386,10 +386,10 @@ export default function PricingSection() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
-          className="mt-12 bg-muted/30 p-6 rounded-lg border border-primary/10 text-center max-w-3xl mx-auto"
+          className="mt-8 sm:mt-10 md:mt-12 bg-muted/30 p-4 sm:p-6 rounded-lg border border-primary/10 text-center max-w-3xl mx-auto"
         >
-          <h4 className="font-semibold text-foreground">All plans include:</h4>
-          <p className="mt-2 text-muted-foreground">
+          <h4 className="font-semibold text-foreground text-sm sm:text-base">All plans include:</h4>
+          <p className="mt-2 text-muted-foreground text-xs sm:text-sm">
             Industry-leading security, inactivity verification, data encryption, 24/7 monitoring, and 30-day money-back guarantee.
           </p>
         </motion.div>

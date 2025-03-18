@@ -33,7 +33,7 @@ export default function AuthDialog({ children, type: initialType = "login" }) {
     otp: "",
     dob: "",
   });
-  
+
   const [acceptTerms, setAcceptTerms] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -89,7 +89,7 @@ export default function AuthDialog({ children, type: initialType = "login" }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    
+
     if (name === "phoneNumber") {
       const numericValue = value.replace(/\D/g, "").slice(0, 10);
       setFormData({ ...formData, [name]: numericValue });
@@ -107,15 +107,20 @@ export default function AuthDialog({ children, type: initialType = "login" }) {
   };
 
   const validateSignUpStep1 = () => {
-    return formData.firstName && formData.lastName && formData.phoneNumber.length === 10 && formData.email.includes("@");
+    return (
+      formData.firstName &&
+      formData.lastName &&
+      formData.phoneNumber.length === 10 &&
+      formData.email.includes("@")
+    );
   };
 
   const validateSignUpStep2 = () => {
     return (
-      formData.password.length >= 8 && 
-      formData.confirmPassword && 
-      formData.password === formData.confirmPassword && 
-      formData.dob && 
+      formData.password.length >= 8 &&
+      formData.confirmPassword &&
+      formData.password === formData.confirmPassword &&
+      formData.dob &&
       acceptTerms
     );
   };
@@ -187,7 +192,9 @@ export default function AuthDialog({ children, type: initialType = "login" }) {
   const handleSignup = async () => {
     setIsLoading(true);
     try {
-      const formattedDob = formData.dob ? format(new Date(formData.dob), "yyyy-MM-dd") : null;
+      const formattedDob = formData.dob
+        ? format(new Date(formData.dob), "yyyy-MM-dd")
+        : null;
       const response = await signupUser({
         firstName: formData.firstName,
         lastName: formData.lastName,
@@ -196,7 +203,7 @@ export default function AuthDialog({ children, type: initialType = "login" }) {
         dob: formattedDob,
         password: formData.password,
       });
-      
+
       const token = response.access_token;
       setSignupToken(token);
       Cookies.set("signup_token", token, {
@@ -205,10 +212,13 @@ export default function AuthDialog({ children, type: initialType = "login" }) {
         secure: process.env.NODE_ENV === "production",
         sameSite: "strict",
       });
-      
+
       console.log("Signup token set:", token);
-      console.log("Cookies after signup (immediate):", Cookies.get("signup_token"));
-      
+      console.log(
+        "Cookies after signup (immediate):",
+        Cookies.get("signup_token")
+      );
+
       setIsVerifyingOtp(true);
       setSuccessMessage("Signup successful! Please verify your OTP.");
     } catch (error) {
@@ -222,11 +232,11 @@ export default function AuthDialog({ children, type: initialType = "login" }) {
     setIsLoading(true);
     setError(null);
     setSuccessMessage(null);
-    
+
     try {
       const token = signupToken || Cookies.get("signup_token");
       console.log("Signup token before OTP verification:", token);
-      
+
       if (!token) {
         throw new Error("Signup session expired. Please sign up again.");
       }
@@ -289,11 +299,11 @@ export default function AuthDialog({ children, type: initialType = "login" }) {
     setIsLoading(true);
     setError(null);
     setSuccessMessage(null);
-    
+
     try {
       const token = signupToken || Cookies.get("signup_token");
       console.log("Signup token before resend OTP:", token);
-      
+
       if (!token) {
         throw new Error("Signup session expired. Please sign up again.");
       }
@@ -301,7 +311,7 @@ export default function AuthDialog({ children, type: initialType = "login" }) {
       const response = await resendOtp({
         headers: { Authorization: `Bearer ${token}` },
       });
-      
+
       console.log("Resend OTP response:", response);
       setSuccessMessage("New OTP sent to your phone!");
     } catch (error) {
@@ -323,7 +333,12 @@ export default function AuthDialog({ children, type: initialType = "login" }) {
 
     if (authType === "login" && validateLogin()) {
       handleLogin();
-    } else if (authType === "signup" && !isVerifyingOtp && currentStep === 2 && validateSignUpStep2()) {
+    } else if (
+      authType === "signup" &&
+      !isVerifyingOtp &&
+      currentStep === 2 &&
+      validateSignUpStep2()
+    ) {
       handleSignup();
     } else if (authType === "signup" && isVerifyingOtp && validateOtp()) {
       handleVerifyOtp();
@@ -341,19 +356,25 @@ export default function AuthDialog({ children, type: initialType = "login" }) {
   const passwordStrong = formData.password.length >= 8;
 
   return (
-    <Dialog open={open} onOpenChange={(isOpen) => {
-      setOpen(isOpen);
-      if (!isOpen) resetForm();
-    }}>
+    <Dialog
+      open={open}
+      onOpenChange={(isOpen) => {
+        setOpen(isOpen);
+        if (!isOpen) resetForm();
+      }}
+    >
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="sm:max-w-md md:max-w-lg border border-primary/20 bg-popover text-foreground">
         <DialogHeader>
-          <DialogTitle className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-foreground via-foreground to-primary/80">
+          <DialogTitle className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-foreground via-foreground to-primary/80 text-center">
             {authType === "login" ? "Welcome Back" : "Create Your Account"}
           </DialogTitle>
-          <DialogDescription className="text-muted-foreground">
+          <DialogDescription className="text-muted-foreground text-center">
             {authType === "login" ? (
-              <>Login to your account below</>
+              <div className="text-center">
+                <p>Glad to see you again</p>
+                <p>Login to your account below</p>
+              </div>
             ) : isVerifyingOtp ? (
               "Enter the 6-digit OTP sent to your phone."
             ) : (
@@ -366,7 +387,9 @@ export default function AuthDialog({ children, type: initialType = "login" }) {
           {authType === "login" ? (
             <>
               <div className="space-y-2">
-                <Label htmlFor="phone" className="text-foreground">Phone Number</Label>
+                <Label htmlFor="phone" className="text-foreground">
+                  Phone Number
+                </Label>
                 <div className="relative">
                   <Phone className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground h-4 w-4" />
                   <Input
@@ -382,7 +405,9 @@ export default function AuthDialog({ children, type: initialType = "login" }) {
                 </div>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="password" className="text-foreground">Password</Label>
+                <Label htmlFor="password" className="text-foreground">
+                  Password
+                </Label>
                 <div className="relative">
                   <LockIcon className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground h-4 w-4" />
                   <Input
@@ -399,12 +424,19 @@ export default function AuthDialog({ children, type: initialType = "login" }) {
                     onClick={() => setShowPassword(!showPassword)}
                     className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
                   >
-                    {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                    {showPassword ? (
+                      <EyeOff className="h-4 w-4" />
+                    ) : (
+                      <Eye className="h-4 w-4" />
+                    )}
                   </button>
                 </div>
               </div>
               <div className="flex justify-end">
-                <a href="#" className="text-sm font-medium text-primary hover:text-primary/80 transition-colors">
+                <a
+                  href="#"
+                  className="text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+                >
                   Forgot password?
                 </a>
               </div>
@@ -412,7 +444,9 @@ export default function AuthDialog({ children, type: initialType = "login" }) {
           ) : isVerifyingOtp ? (
             <div className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="otp" className="text-foreground">OTP</Label>
+                <Label htmlFor="otp" className="text-foreground">
+                  OTP
+                </Label>
                 <Input
                   id="otp"
                   name="otp"
@@ -438,7 +472,9 @@ export default function AuthDialog({ children, type: initialType = "login" }) {
             <>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="firstName" className="text-foreground">First Name</Label>
+                  <Label htmlFor="firstName" className="text-foreground">
+                    First Name
+                  </Label>
                   <div className="relative">
                     <User className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground h-4 w-4" />
                     <Input
@@ -453,7 +489,9 @@ export default function AuthDialog({ children, type: initialType = "login" }) {
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="lastName" className="text-foreground">Last Name</Label>
+                  <Label htmlFor="lastName" className="text-foreground">
+                    Last Name
+                  </Label>
                   <div className="relative">
                     <User className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground h-4 w-4" />
                     <Input
@@ -469,7 +507,9 @@ export default function AuthDialog({ children, type: initialType = "login" }) {
                 </div>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="phoneNumber" className="text-foreground">Phone Number</Label>
+                <Label htmlFor="phoneNumber" className="text-foreground">
+                  Phone Number
+                </Label>
                 <div className="relative">
                   <Phone className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground h-4 w-4" />
                   <Input
@@ -485,7 +525,9 @@ export default function AuthDialog({ children, type: initialType = "login" }) {
                 </div>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="email" className="text-foreground">Email Address</Label>
+                <Label htmlFor="email" className="text-foreground">
+                  Email Address
+                </Label>
                 <div className="relative">
                   <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground h-4 w-4" />
                   <Input
@@ -504,7 +546,9 @@ export default function AuthDialog({ children, type: initialType = "login" }) {
           ) : (
             <>
               <div className="space-y-2">
-                <Label htmlFor="password" className="text-foreground">Password</Label>
+                <Label htmlFor="password" className="text-foreground">
+                  Password
+                </Label>
                 <div className="relative">
                   <Shield className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground h-4 w-4" />
                   <Input
@@ -522,17 +566,29 @@ export default function AuthDialog({ children, type: initialType = "login" }) {
                     onClick={() => setShowPassword(!showPassword)}
                     className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
                   >
-                    {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                    {showPassword ? (
+                      <EyeOff className="h-4 w-4" />
+                    ) : (
+                      <Eye className="h-4 w-4" />
+                    )}
                   </button>
                 </div>
                 {formData.password && (
-                  <div className={`text-xs ${passwordStrong ? "text-green-500" : "text-orange-500"}`}>
-                    {passwordStrong ? "Password strength: Good" : "Password must be at least 8 characters"}
+                  <div
+                    className={`text-xs ${
+                      passwordStrong ? "text-green-500" : "text-orange-500"
+                    }`}
+                  >
+                    {passwordStrong
+                      ? "Password strength: Good"
+                      : "Password must be at least 8 characters"}
                   </div>
                 )}
               </div>
               <div className="space-y-2">
-                <Label htmlFor="confirmPassword" className="text-foreground">Confirm Password</Label>
+                <Label htmlFor="confirmPassword" className="text-foreground">
+                  Confirm Password
+                </Label>
                 <div className="relative">
                   <Shield className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground h-4 w-4" />
                   <Input
@@ -543,7 +599,9 @@ export default function AuthDialog({ children, type: initialType = "login" }) {
                     value={formData.confirmPassword}
                     onChange={handleChange}
                     className={`pl-10 pr-10 bg-background border-input text-foreground placeholder:text-muted-foreground focus-visible:ring-primary ${
-                      formData.confirmPassword && !passwordsMatch ? "border-destructive" : ""
+                      formData.confirmPassword && !passwordsMatch
+                        ? "border-destructive"
+                        : ""
                     }`}
                     required
                   />
@@ -552,15 +610,23 @@ export default function AuthDialog({ children, type: initialType = "login" }) {
                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                     className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
                   >
-                    {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                    {showConfirmPassword ? (
+                      <EyeOff className="h-4 w-4" />
+                    ) : (
+                      <Eye className="h-4 w-4" />
+                    )}
                   </button>
                 </div>
                 {formData.confirmPassword && !passwordsMatch && (
-                  <div className="text-xs text-destructive">Passwords do not match</div>
+                  <div className="text-xs text-destructive">
+                    Passwords do not match
+                  </div>
                 )}
               </div>
               <div className="space-y-2">
-                <Label htmlFor="dob" className="text-foreground">Date of Birth</Label>
+                <Label htmlFor="dob" className="text-foreground">
+                  Date of Birth
+                </Label>
                 <Input
                   id="dob"
                   name="dob"
@@ -572,20 +638,29 @@ export default function AuthDialog({ children, type: initialType = "login" }) {
                 />
               </div>
               <div className="flex items-start space-x-2 pt-2">
-                <Checkbox 
-                  id="terms" 
-                  checked={acceptTerms} 
+                <Checkbox
+                  id="terms"
+                  checked={acceptTerms}
                   onCheckedChange={setAcceptTerms}
                   className="data-[state=checked]:bg-primary data-[state=checked]:border-primary mt-1"
                 />
                 <div className="grid gap-1.5 leading-none">
-                  <label htmlFor="terms" className="text-sm leading-snug text-muted-foreground">
+                  <label
+                    htmlFor="terms"
+                    className="text-sm leading-snug text-muted-foreground"
+                  >
                     I agree to the{" "}
-                    <a href="#" className="text-primary hover:text-primary/80 font-medium underline transition-colors">
+                    <a
+                      href="#"
+                      className="text-primary hover:text-primary/80 font-medium underline transition-colors"
+                    >
                       Terms of Service
                     </a>{" "}
                     and{" "}
-                    <a href="#" className="text-primary hover:text-primary/80 font-medium underline transition-colors">
+                    <a
+                      href="#"
+                      className="text-primary hover:text-primary/80 font-medium underline transition-colors"
+                    >
                       Privacy Policy
                     </a>
                   </label>
@@ -594,7 +669,7 @@ export default function AuthDialog({ children, type: initialType = "login" }) {
             </>
           )}
 
-          <div className="min-h-[24px]">
+          <div className="">
             {error && (
               <div className="text-destructive text-sm bg-destructive/10 p-2 rounded-md animate-in fade-in">
                 {error}
@@ -607,28 +682,32 @@ export default function AuthDialog({ children, type: initialType = "login" }) {
             )}
           </div>
 
-          <DialogFooter className="flex flex-col sm:flex-row gap-2 sm:gap-0 pt-4">
+          <DialogFooter className="flex flex-col sm:flex-row gap-2 sm:gap-0 pt-2 ">
             {authType === "login" ? (
-              <Button 
-                type="submit" 
+              <Button
+                type="submit"
                 disabled={!validateLogin() || isLoading}
                 className="w-full bg-primary hover:bg-primary/90 text-primary-foreground transition-all duration-200 py-5"
               >
-                {isLoading ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : null}
+                {isLoading ? (
+                  <Loader2 className="h-4 w-4 animate-spin mr-2" />
+                ) : null}
                 {isLoading ? "Logging in..." : "Login"}
               </Button>
             ) : isVerifyingOtp ? (
-              <Button 
-                type="submit" 
+              <Button
+                type="submit"
                 disabled={!validateOtp() || isLoading}
                 className="w-full bg-primary hover:bg-primary/90 text-primary-foreground transition-all duration-200 py-5"
               >
-                {isLoading ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : null}
+                {isLoading ? (
+                  <Loader2 className="h-4 w-4 animate-spin mr-2" />
+                ) : null}
                 {isLoading ? "Verifying..." : "Verify OTP"}
               </Button>
             ) : currentStep === 1 ? (
-              <Button 
-                type="button" 
+              <Button
+                type="button"
                 onClick={nextStep}
                 disabled={!validateSignUpStep1() || isLoading}
                 className="w-full bg-primary hover:bg-primary/90 text-primary-foreground transition-all duration-200 py-5"
@@ -637,8 +716,8 @@ export default function AuthDialog({ children, type: initialType = "login" }) {
               </Button>
             ) : (
               <div className="flex flex-col sm:flex-row w-full gap-2">
-                <Button 
-                  type="button" 
+                <Button
+                  type="button"
                   onClick={prevStep}
                   variant="outline"
                   className="sm:flex-1 bg-transparent border-input text-foreground hover:bg-accent hover:text-accent-foreground transition-all duration-200 py-5"
@@ -646,12 +725,14 @@ export default function AuthDialog({ children, type: initialType = "login" }) {
                 >
                   Back
                 </Button>
-                <Button 
-                  type="submit" 
+                <Button
+                  type="submit"
                   disabled={!validateSignUpStep2() || isLoading}
                   className="sm:flex-1 bg-primary hover:bg-primary/90 text-primary-foreground transition-all duration-200 py-5"
                 >
-                  {isLoading ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : null}
+                  {isLoading ? (
+                    <Loader2 className="h-4 w-4 animate-spin mr-2" />
+                  ) : null}
                   {isLoading ? "Creating..." : "Create Account"}
                 </Button>
               </div>
@@ -660,10 +741,14 @@ export default function AuthDialog({ children, type: initialType = "login" }) {
 
           <div className="text-center pt-2">
             <p className="text-muted-foreground text-sm">
-              {authType === "login" ? "Don't have an account? " : "Already have an account? "}
+              {authType === "login"
+                ? "Don't have an account? "
+                : "Already have an account? "}
               <button
                 type="button"
-                onClick={() => switchAuthType(authType === "login" ? "signup" : "login")}
+                onClick={() =>
+                  switchAuthType(authType === "login" ? "signup" : "login")
+                }
                 className="text-primary hover:text-primary/80 font-medium transition-colors disabled:opacity-50"
                 disabled={isVerifyingOtp || isLoading}
               >

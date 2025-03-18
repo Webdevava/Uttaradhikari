@@ -158,7 +158,7 @@ export default function Navbar() {
               <AuthDialog type="signup">
                 <Button
                   size="sm"
-                  className="bg-primary hover:bg-white/15 text-white text-sm cursor-pointer"
+                  className="bg-blue-700 hover:bg-blue-500/75 text-white text-sm cursor-pointer"
                 >
                   Sign Up
                 </Button>
